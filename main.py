@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import PythonTest as pt
+import CythonTest as ct
+import time
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+a = int(input('enter a: '))
+b = int(input('enter b: '))
+N = int(input('enter N: '))
 
+start = time.time()
+ct.integrate_f(a, b, N)
+end =  time.time()
+cy_time = end - start
+print("Cython time = {}".format(cy_time))
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+start = time.time()
+pt.integrate_f(a, b, N)
+end =  time.time()
+py_time = end - start
+print("Python time = {}".format(py_time))
+print("Speedup = {}".format(py_time / cy_time))
